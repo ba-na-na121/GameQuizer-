@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* 页面整体背景和字体设置 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Press Start 2P', cursive;
+  background-color: #000;
+  color: #f44336;
+  image-rendering: pixelated;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("data:image/svg+xml,%3Csvg width='800' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='40' y='280' font-family='Press Start 2P' font-size='100' fill='%23330000'%3EGAME%3C/text%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 600px 300px;
+}
+
+/* 页面内容容器 */
+.container {
+  max-width: 100%;
+  padding: 60px 40px;
+  background-color: rgba(0, 0, 0, 0.85);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* 每道问题的标题（如 h1） */
+h1 {
+  color: #f44336;
+  font-size: 32px;
+  margin-bottom: 50px;
+  line-height: 1.8;
+}
+
+/* 普通段落文字 p */
+p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #f44336;
+  margin-bottom: 20px;
+}
+
+/* 每个问题块的外部容器 */
+.question {
+  margin-bottom: 60px;
+}
+
+/* 答案按钮容器，横向排列 */
+.answers {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* 每个答案按钮样式 */
+button {
+  background-color: transparent;
+  color: #f44336;
+  padding: 20px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  border: none;
+}
+
+/* 鼠标悬停按钮样式 */
+button:hover {
+  background-color: #f44336;
+  color: #000;
+}
+button.selected {
+  background-color: #f44336;
+  color: #000;
+}
+
+/* 游戏推荐卡片容器（备用） */
+.card {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 40px;
+  margin: 30px 0;
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 游戏推荐卡片内图片样式 */
+.card img {
+  width: 100%;
+  image-rendering: pixelated;
+  margin-bottom: 10px;
+  border: none;
+}
+
+/* 游戏卡片标题 */
+.card h2 {
+  font-size: 24px;
+  color: #f44336;
+  line-height: 1.8;
+}
+
+/* 游戏卡片说明文字 */
+.card p {
+  font-size: 18px;
+  color: #f44336;
+  line-height: 1.8;
+}
+
+/* 链接样式 */
+a {
+  color: #f44336;
+  text-decoration: none;
+}
+
+/* 链接悬停效果 */
+a:hover {
+  text-decoration: underline;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(255, 68, 68, 0.3);
+}

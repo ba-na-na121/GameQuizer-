@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Game Recommendation Result</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Recommended Game for You:</h2>
+    <div id="gameResults" class="game-grid"></div>
+    <button onclick="restartQuiz()">Retake Quiz</button>
+    <button onclick="window.location.href='history.html'">View History</button>
+  </div>
+  <script>
+    const gameLibrary = [
+      {
+        name: "Hades",
+        image: "https://cdn.akamai.steamstatic.com/steam/apps/1145360/header.jpg",
+        description: "A fast-paced dungeon action game that combines combat and story.",
+        reason: "Perfect for those who enjoy challenges, smooth controls, and want to experience a story.",
+        link: "https://store.steampowered.com/app/1145360/Hades/",
+        tags: ["Action", "Single Player"]
+      },
+      {
+        name: "It Takes Two",
+        image: "https://cdn.akamai.steamstatic.com/steam/apps/1426210/header.jpg",
+        description: "A fantastical adventure designed for two players, full of creativity and joy.",
+        reason: "If you want to play with a friend, this is the perfect choice.",
+        link: "https://store.steampowered.com/app/1426210/It_Takes_Two/",
+        tags: ["Co-op", "Multiplayer"]
+      },
+      {
+        name: "Slay the Spire",
+        image: "https://cdn.akamai.steamstatic.com/steam/apps/646570/header.jpg",
+        description: "A strategic masterpiece that perfectly combines card building and Roguelike elements.",
+        reason: "Ideal for those who enjoy strategy and constantly challenging themselves.",
+        link: "https://store.steampowered.com/app/646570/Slay_the_Spire/",
+        tags: ["Strategy", "Single Player"]
+      },
+      {
+        name: "Stardew Valley",
+        image: "https://cdn.akamai.steamstatic.com/steam/apps/413150/header.jpg",
+        description: "A simulation of farm life that is relaxing and healing.",
+        reason: "Suitable for those who enjoy a slow-paced, life-enjoying experience.",
+        link: "https://store.steampowered.com/app/413150/Stardew_Valley/",
+        tags: ["Casual", "Single Player", "Multiplayer"]
+      },
+      {
+        name: "Deep Rock Galactic",
+        image: "https://cdn.akamai.steamstatic.com/steam/apps/548430/header.jpg",
+        description: "A mining shooter game for four players, fast-paced and humorous.",
+        reason: "Great for mining and monster hunting with friends, super stress-relieving.",
+        link: "https://store.steampowered.com/app/548430/Deep_Rock_Galactic/",
+        tags: ["Co-op", "Multiplayer"]
+      },
+      {
+        name: "Gris",
+        image: "https://cdn.akamai.steamstatic.com/steam/apps/683320/header.jpg",
+        description: "A narrative masterpiece that blends visual art and emotional expression.",
+        reason: "Perfect for those who want to quietly experience a story alone.",
+        link: "https://store.steampowered.com/app/683320/GRIS/",
+        tags: ["Narrative", "Single Player"]
+      }
+    ];
+
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    function getRecommendation() {
+      const playStyle = localStorage.getItem("q9");
+      let filtered = gameLibrary;
+      if (playStyle.includes("一个人")) filtered = gameLibrary.filter(g => g.tags.includes("Single Player"));
+      else if (playStyle.includes("朋友")) filtered = gameLibrary.filter(g => g.tags.includes("Co-op") || g.tags.includes("Multiplayer"));
+      else if (playStyle.includes("竞技")) filtered = gameLibrary.filter(g => g.tags.includes("Competitive"));
+      const selected = shuffle(filtered).slice(0, 1);
+      const container = document.getElementById("gameResults");
+      selected.forEach(game => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="${game.image}" alt="${game.name}" onclick="window.open('${game.link}', '_blank')">
+          <h2>${game.name}</h2>
+          <p>${game.description}</p>
+          <p class="game-reason">Why I recommend it: ${game.reason}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+    
+
+    function restartQuiz() {
+      window.location.href = 'quiz.html';
+    }
+
+    window.onload = getRecommendation;
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Game History</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>Previous Game Recommendations</h2>
+    <div id="historyList"></div>
+    <button onclick="clearHistory()">Clear History</button>
+    <button onclick="window.location.href='index.html'">Back to Home</button>
+  </div>
+
+  <script>
+    function loadHistory() {
+      const history = JSON.parse(localStorage.getItem('recommendHistory')) || [];
+      const container = document.getElementById('historyList');
+      if (history.length === 0) {
+        container.innerHTML = "<p>No previous recommendations.</p>";
+        return;
+      }
+
+      history.forEach(game => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="${game.image}" alt="${game.name}">
+          <h2>${game.name}</h2>
+          <p>${game.description}</p>
+          <p class="game-reason">Why it was recommended: ${game.reason}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function clearHistory() {
+      localStorage.removeItem('recommendHistory');
+      location.reload();
+    }
+
+    window.onload = loadHistory;
+  </script>
+</body>
+</html>

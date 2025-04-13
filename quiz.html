@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Game Quiz</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <div class="question">
+      <h1> What kind of gameplay do you prefer?</h1>
+      <div class="answers">
+        <button onclick="selectAnswer(1, 'Action')">Action</button>
+        <button onclick="selectAnswer(1, 'Strategy')">Strategy</button>
+        <button onclick="selectAnswer(1, 'Casual')">Casual</button>
+        <button onclick="selectAnswer(1, 'Simulation')">Simulation</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <h1> What is your favorite game perspective?</h1>
+      <div class="answers">
+        <button onclick="selectAnswer(2, 'First-person')">First-person</button>
+        <button onclick="selectAnswer(2, 'Third-person')">Third-person</button>
+        <button onclick="selectAnswer(2, 'Top-down')">Top-down</button>
+        <button onclick="selectAnswer(2, 'Side-scrolling')">Side-scrolling</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <h1> What type of narrative do you enjoy?</h1>
+      <div class="answers">
+        <button onclick="selectAnswer(3, 'Linear')">Linear</button>
+        <button onclick="selectAnswer(3, 'Branching')">Branching</button>
+        <button onclick="selectAnswer(3, 'No Story')">No Story</button>
+        <button onclick="selectAnswer(3, 'Emergent')">Emergent</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <h1> Which graphic style do you prefer?</h1>
+      <div class="answers">
+        <button onclick="selectAnswer(4, 'Pixel')">Pixel</button>
+        <button onclick="selectAnswer(4, '3D Realistic')">3D Realistic</button>
+        <button onclick="selectAnswer(4, 'Hand-drawn')">Hand-drawn</button>
+        <button onclick="selectAnswer(4, 'Minimalist')">Minimalist</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <h1> What kind of pacing do you like?</h1>
+      <div class="answers">
+        <button onclick="selectAnswer(5, 'Fast')">Fast</button>
+        <button onclick="selectAnswer(5, 'Slow')">Slow</button>
+        <button onclick="selectAnswer(5, 'Turn-based')">Turn-based</button>
+        <button onclick="selectAnswer(5, 'Real-time')">Real-time</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <h1> Do you like competitive or cooperative play?</h1>
+      <div class="answers">
+        <button onclick="selectAnswer(6, 'Competitive')">Competitive</button>
+        <button onclick="selectAnswer(6, 'Cooperative')">Cooperative</button>
+        <button onclick="selectAnswer(6, 'Solo')">Solo</button>
+        <button onclick="selectAnswer(6, 'Flexible')">Flexible</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <h1> What level of difficulty do you enjoy?</h1>
+      <div class="answers">
+        <button onclick="selectAnswer(7, 'Easy')">Easy</button>
+        <button onclick="selectAnswer(7, 'Medium')">Medium</button>
+        <button onclick="selectAnswer(7, 'Hard')">Hard</button>
+        <button onclick="selectAnswer(7, 'Unforgiving')">Unforgiving</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <h1> What devices do you usually play on?</h1>
+      <div class="answers">
+        <button onclick="selectAnswer(8, 'PC')">PC</button>
+        <button onclick="selectAnswer(8, 'Console')">Console</button>
+        <button onclick="selectAnswer(8, 'Mobile')">Mobile</button>
+        <button onclick="selectAnswer(8, 'Handheld')">Handheld</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <h1> Do you prefer playing alone or with others?</h1>
+      <div class="answers">
+        <button onclick="selectAnswer(9, 'Alone')">Alone</button>
+        <button onclick="selectAnswer(9, 'With Friends')">With Friends</button>
+        <button onclick="selectAnswer(9, 'Online Players')">Online Players</button>
+        <button onclick="selectAnswer(9, 'Mixed')">Mixed</button>
+      </div>
+    </div>
+
+    <div class="question">
+      <h1>Ready to play the new games?</h1>
+      <div class="answers">
+        <button onclick="submitQuiz()">Yes!</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const answers = {};
+  
+    function selectAnswer(questionNumber, value) {
+      answers[questionNumber] = value;
+      localStorage.setItem('quizAnswers', JSON.stringify(answers));
+      console.log('Q' + questionNumber + ': ' + value);
+  
+      // 移除当前题目下其他按钮的 .selected 状态
+      const allButtons = document.querySelectorAll(`.question:nth-of-type(${questionNumber}) .answers button`);
+      allButtons.forEach(btn => btn.classList.remove('selected'));
+  
+      // 给当前点击的按钮添加 .selected 类
+      event.target.classList.add('selected');
+    }
+
+    function submitQuiz() {
+      window.location.href = "result.html";
+    }
+  </script>
+</body>
+</html>
