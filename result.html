@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -70,12 +70,22 @@
 
     function getRecommendation() {
       const playStyle = localStorage.getItem("q9");
+
+      if (!playStyle) {
+        document.getElementById("gameResults").innerHTML = "<p style='color:white'>Please complete the quiz first before viewing results.</p>";
+        return;
+      }
+
       let filtered = gameLibrary;
-      if (playStyle.includes("一个人")) filtered = gameLibrary.filter(g => g.tags.includes("Single Player"));
-      else if (playStyle.includes("朋友")) filtered = gameLibrary.filter(g => g.tags.includes("Co-op") || g.tags.includes("Multiplayer"));
-      else if (playStyle.includes("竞技")) filtered = gameLibrary.filter(g => g.tags.includes("Competitive"));
+      if (playStyle.includes("Alone")) {
+        filtered = gameLibrary.filter(g => g.tags.includes("Single Player"));
+      } else if (playStyle.includes("Friends") || playStyle.includes("Online")) {
+        filtered = gameLibrary.filter(g => g.tags.includes("Co-op") || g.tags.includes("Multiplayer"));
+      }
+
       const selected = shuffle(filtered).slice(0, 1);
       const container = document.getElementById("gameResults");
+
       selected.forEach(game => {
         const card = document.createElement("div");
         card.className = "card";
