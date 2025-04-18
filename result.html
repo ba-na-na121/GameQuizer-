@@ -69,7 +69,17 @@
     }
 
     function getRecommendation() {
-      const playStyle = localStorage.getItem("q9");
+      const storedAnswers = localStorage.getItem("quizAnswers");
+      let playStyle = null;
+
+      if (storedAnswers) {
+        try {
+          const parsed = JSON.parse(storedAnswers);
+          playStyle = parsed[9];
+        } catch (e) {
+          console.error("Failed to parse quizAnswers from localStorage", e);
+        }
+      }
 
       if (!playStyle) {
         document.getElementById("gameResults").innerHTML = "<p style='color:white'>Please complete the quiz first before viewing results.</p>";
