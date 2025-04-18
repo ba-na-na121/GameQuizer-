@@ -109,7 +109,8 @@
   </div>
 
   <script>
-    const answers = {};
+    const savedAnswers = localStorage.getItem('quizAnswers');
+    const answers = savedAnswers ? JSON.parse(savedAnswers) : {};
   
     function selectAnswer(questionNumber, value) {
       answers[questionNumber] = value;
